@@ -1,0 +1,55 @@
+version: 1
+title: Agentic Engineering Patterns
+languages:
+  - en
+  - ko
+items:
+  - id: agentic-engineering-patterns-intro
+    order: 1
+    title:
+      en: Agentic Engineering Patterns
+      ko: 에이전틱 엔지니어링 패턴
+    source:
+      url: https://simonwillison.net/2026/Feb/23/agentic-engineering-patterns/
+    path:
+      en: docs/en/00-agentic-engineering-patterns-intro.md
+      ko: docs/ko/00-agentic-engineering-patterns-intro.md
+
+  - id: writing-code-is-cheap-now
+    order: 2
+    title:
+      en: Writing code is cheap now
+      ko: 이제 코드는 싸다
+    source:
+      url: https://simonwillison.net/guides/agentic-engineering-patterns/code-is-cheap/
+    path:
+      en: docs/en/01-writing-code-is-cheap-now.md
+      ko: docs/ko/01-writing-code-is-cheap-now.md
+
+  - id: testing-and-qa
+    order: 3
+    title:
+      en: Testing and QA
+      ko: 테스트와 QA
+    children:
+      - id: red-green-tdd
+        order: 1
+        title:
+          en: Red/green TDD
+          ko: 레드/그린 TDD
+        source:
+          url: https://simonwillison.net/guides/agentic-engineering-patterns/red-green-tdd/
+        path:
+          en: docs/en/02-testing-and-qa/01-red-green-tdd.md
+          ko: docs/ko/02-testing-and-qa/01-red-green-tdd.md
+
+      - id: first-run-the-tests
+        order: 2
+        title:
+          en: First run the tests
+          ko: 먼저 테스트를 실행하라
+        source:
+          url: https://simonwillison.net/guides/agentic-engineering-patterns/first-run-the-tests/
+        path:
+          en: docs/en/02-testing-and-qa/02-first-run-the-tests.md
+          ko: docs/ko/02-testing-and-qa/02-first-run-the-tests.md

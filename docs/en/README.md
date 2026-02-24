@@ -1,0 +1,12 @@
+# Agentic Engineering Patterns (EN)
+
+This is the English guide set.
+
+## TOC
+1. [Agentic Engineering Patterns](./00-agentic-engineering-patterns-intro.md)
+2. [Writing code is cheap now](./01-writing-code-is-cheap-now.md)
+3. Testing and QA
+   1. [Red/green TDD](./02-testing-and-qa/01-red-green-tdd.md)
+   2. [First run the tests](./02-testing-and-qa/02-first-run-the-tests.md)
+
+Korean version: [한국어 문서](../ko/README.md)
