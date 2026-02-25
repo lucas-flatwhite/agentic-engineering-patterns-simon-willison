@@ -8,5 +8,7 @@ This is the English guide set.
 3. Testing and QA
    1. [Red/green TDD](./02-testing-and-qa/01-red-green-tdd.md)
    2. [First run the tests](./02-testing-and-qa/02-first-run-the-tests.md)
+4. Understanding code
+   1. [Linear walkthroughs](./03-understanding-code/01-linear-walkthroughs.md)
 
 Korean version: [한국어 문서](../ko/README.md)

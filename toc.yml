@@ -53,3 +53,20 @@ items:
         path:
           en: docs/en/02-testing-and-qa/02-first-run-the-tests.md
           ko: docs/ko/02-testing-and-qa/02-first-run-the-tests.md
+
+  - id: understanding-code
+    order: 4
+    title:
+      en: Understanding code
+      ko: 코드 이해하기
+    children:
+      - id: linear-walkthroughs
+        order: 1
+        title:
+          en: Linear walkthroughs
+          ko: 선형 워크스루
+        source:
+          url: https://simonwillison.net/guides/agentic-engineering-patterns/linear-walkthroughs/
+        path:
+          en: docs/en/03-understanding-code/01-linear-walkthroughs.md
+          ko: docs/ko/03-understanding-code/01-linear-walkthroughs.md
