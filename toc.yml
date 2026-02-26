@@ -4,30 +4,25 @@ languages:
   - en
   - ko
 items:
-  - id: agentic-engineering-patterns-intro
+  - id: principles
     order: 1
     title:
-      en: Agentic Engineering Patterns
-      ko: 에이전틱 엔지니어링 패턴
-    source:
-      url: https://simonwillison.net/2026/Feb/23/agentic-engineering-patterns/
-    path:
-      en: docs/en/00-agentic-engineering-patterns-intro.md
-      ko: docs/ko/00-agentic-engineering-patterns-intro.md
-
-  - id: writing-code-is-cheap-now
-    order: 2
-    title:
-      en: Writing code is cheap now
-      ko: 이제 코드는 싸다
-    source:
-      url: https://simonwillison.net/guides/agentic-engineering-patterns/code-is-cheap/
-    path:
-      en: docs/en/01-writing-code-is-cheap-now.md
-      ko: docs/ko/01-writing-code-is-cheap-now.md
+      en: Principles
+      ko: 원칙
+    children:
+      - id: writing-code-is-cheap-now
+        order: 1
+        title:
+          en: Writing code is cheap now
+          ko: 이제 코드는 싸다
+        source:
+          url: https://simonwillison.net/guides/agentic-engineering-patterns/code-is-cheap/
+        path:
+          en: docs/en/01-writing-code-is-cheap-now.md
+          ko: docs/ko/01-writing-code-is-cheap-now.md
 
   - id: testing-and-qa
-    order: 3
+    order: 2
     title:
       en: Testing and QA
       ko: 테스트와 QA
@@ -55,7 +50,7 @@ items:
           ko: docs/ko/02-testing-and-qa/02-first-run-the-tests.md
 
   - id: understanding-code
-    order: 4
+    order: 3
     title:
       en: Understanding code
       ko: 코드 이해하기

@@ -11,6 +11,10 @@ The core idea is simple: writing code is much cheaper than before, but producing
 
 This is intentionally structured as a living guide made of chapter-style documents. Chapters can be updated over time as the field evolves.
 
+Independent article (not part of TOC):
+- English: [Agentic Engineering Patterns intro](./docs/en/00-agentic-engineering-patterns-intro.md)
+- 한국어: [에이전틱 엔지니어링 패턴 소개](./docs/ko/00-agentic-engineering-patterns-intro.md)
+
 ## 프로젝트 의도 (KO)
 
 이 저장소는 Claude Code, OpenAI Codex 같은 코딩 에이전트를 활용한 소프트웨어 개발 패턴을 체계적으로 정리하기 위해 만들었습니다.
