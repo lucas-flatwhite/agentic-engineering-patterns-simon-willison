@@ -22,7 +22,7 @@ items:
           ko: docs/ko/01-writing-code-is-cheap-now.md
 
   - id: testing-and-qa
-    order: 2
+    order: 3
     title:
       en: Testing and QA
       ko: 테스트와 QA
@@ -50,7 +50,7 @@ items:
           ko: docs/ko/02-testing-and-qa/02-first-run-the-tests.md
 
   - id: understanding-code
-    order: 3
+    order: 2
     title:
       en: Understanding code
       ko: 코드 이해하기
