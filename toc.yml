@@ -18,8 +18,19 @@ items:
         source:
           url: https://simonwillison.net/guides/agentic-engineering-patterns/code-is-cheap/
         path:
-          en: docs/en/01-writing-code-is-cheap-now.md
-          ko: docs/ko/01-writing-code-is-cheap-now.md
+          en: docs/en/01-principles/01-writing-code-is-cheap-now.md
+          ko: docs/ko/01-principles/01-writing-code-is-cheap-now.md
+
+      - id: hoard-things-you-know-how-to-do
+        order: 2
+        title:
+          en: Hoard things you know how to do
+          ko: 할 줄 아는 것을 모아두라
+        source:
+          url: https://simonwillison.net/guides/agentic-engineering-patterns/hoard-things-you-know-how-to-do/
+        path:
+          en: docs/en/01-principles/02-hoard-things-you-know-how-to-do.md
+          ko: docs/ko/01-principles/02-hoard-things-you-know-how-to-do.md
 
   - id: testing-and-qa
     order: 3
