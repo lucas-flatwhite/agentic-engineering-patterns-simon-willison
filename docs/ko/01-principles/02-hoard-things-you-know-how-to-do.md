@@ -38,11 +38,128 @@
 
 > This code shows how to open a PDF and turn it into an image per page:
 >
-> (PDF를 이미지로 변환하는 HTML 코드)
+> ```html
+> <!DOCTYPE html>
+> <html>
+> <head>
+>   <title>PDF to Images</title>
+>   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+>   <style>
+>     .image-container img {
+>       margin-bottom: 10px;
+>     }
+>     .image-container p {
+>       margin: 0;
+>       font-size: 14px;
+>       color: #888;
+>     }
+>   </style>
+> </head>
+> <body>
+>   <input type="file" id="fileInput" accept=".pdf" />
+>   <div class="image-container"></div>
+>
+>   <script>
+>   const desiredWidth = 800;
+>     const fileInput = document.getElementById('fileInput');
+>     const imageContainer = document.querySelector('.image-container');
+>
+>     fileInput.addEventListener('change', handleFileUpload);
+>
+>     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.worker.min.js';
+>
+>     async function handleFileUpload(event) {
+>       const file = event.target.files[0];
+>       const imageIterator = convertPDFToImages(file);
+>
+>       for await (const { imageURL, size } of imageIterator) {
+>         const imgElement = document.createElement('img');
+>         imgElement.src = imageURL;
+>         imageContainer.appendChild(imgElement);
+>
+>         const sizeElement = document.createElement('p');
+>         sizeElement.textContent = `Size: ${formatSize(size)}`;
+>         imageContainer.appendChild(sizeElement);
+>       }
+>     }
+>
+>     async function* convertPDFToImages(file) {
+>       try {
+>         const pdf = await pdfjsLib.getDocument(URL.createObjectURL(file)).promise;
+>         const numPages = pdf.numPages;
+>
+>         for (let i = 1; i <= numPages; i++) {
+>           const page = await pdf.getPage(i);
+>           const viewport = page.getViewport({ scale: 1 });
+>           const canvas = document.createElement('canvas');
+>           const context = canvas.getContext('2d');
+>           canvas.width = desiredWidth;
+>           canvas.height = (desiredWidth / viewport.width) * viewport.height;
+>           const renderContext = {
+>             canvasContext: context,
+>             viewport: page.getViewport({ scale: desiredWidth / viewport.width }),
+>           };
+>           await page.render(renderContext).promise;
+>           const imageURL = canvas.toDataURL('image/jpeg', 0.8);
+>           const size = calculateSize(imageURL);
+>           yield { imageURL, size };
+>         }
+>       } catch (error) {
+>         console.error('Error:', error);
+>       }
+>     }
+>
+>     function calculateSize(imageURL) {
+>       const base64Length = imageURL.length - 'data:image/jpeg;base64,'.length;
+>       const sizeInBytes = Math.ceil(base64Length * 0.75);
+>       return sizeInBytes;
+>     }
+>
+>     function formatSize(size) {
+>       const sizeInKB = (size / 1024).toFixed(2);
+>       return `${sizeInKB} KB`;
+>     }
+>   </script>
+> </body>
+> </html>
+> ```
 >
 > This code shows how to OCR an image:
 >
-> (Tesseract.js OCR 코드)
+> ```js
+> async function ocrMissingAltText() {
+>     // Load Tesseract
+>     var s = document.createElement("script");
+>     s.src = "https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js";
+>     document.head.appendChild(s);
+>
+>     s.onload = async () => {
+>       const images = document.getElementsByTagName("img");
+>       const worker = Tesseract.createWorker();
+>       await worker.load();
+>       await worker.loadLanguage("eng");
+>       await worker.initialize("eng");
+>       ocrButton.innerText = "Running OCR...";
+>
+>       // Iterate through all the images in the output div
+>       for (const img of images) {
+>         const altTextarea = img.parentNode.querySelector(".textarea-alt");
+>         // Check if the alt textarea is empty
+>         if (altTextarea.value === "") {
+>           const imageUrl = img.src;
+>           var {
+>             data: { text },
+>           } = await worker.recognize(imageUrl);
+>           altTextarea.value = text; // Set the OCR result to the alt textarea
+>           progressBar.value += 1;
+>         }
+>       }
+>
+>       await worker.terminate();
+>       ocrButton.innerText = "OCR complete";
+>     };
+>   }
+> ```
 >
 > Use these examples to put together a single HTML page with embedded HTML and CSS and JavaScript that provides a big square which users can drag and drop a PDF file onto and when they do that the PDF has every page converted to a JPEG and shown below on the page, then OCR is run with tesseract and the results are shown in textarea blocks below each image.
 
