@@ -4,7 +4,8 @@
 
 ## TOC
 1. 원칙
-   1. [이제 코드는 싸다](./01-writing-code-is-cheap-now.md)
+   1. [이제 코드는 싸다](./01-principles/01-writing-code-is-cheap-now.md)
+   2. [할 줄 아는 것을 모아두라](./01-principles/02-hoard-things-you-know-how-to-do.md)
 2. 코드 이해하기
    1. [선형 워크스루](./03-understanding-code/01-linear-walkthroughs.md)
 3. 테스트와 QA

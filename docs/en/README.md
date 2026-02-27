@@ -4,7 +4,8 @@ This is the English guide set.
 
 ## TOC
 1. Principles
-   1. [Writing code is cheap now](./01-writing-code-is-cheap-now.md)
+   1. [Writing code is cheap now](./01-principles/01-writing-code-is-cheap-now.md)
+   2. [Hoard things you know how to do](./01-principles/02-hoard-things-you-know-how-to-do.md)
 2. Understanding code
    1. [Linear walkthroughs](./03-understanding-code/01-linear-walkthroughs.md)
 3. Testing and QA
