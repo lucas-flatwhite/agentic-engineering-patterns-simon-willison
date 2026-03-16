@@ -10,27 +10,77 @@ items:
       en: Principles
       ko: 원칙
     children:
-      - id: writing-code-is-cheap-now
+      - id: what-is-agentic-engineering
         order: 1
+        title:
+          en: What is agentic engineering?
+          ko: 에이전틱 엔지니어링이란 무엇인가?
+        source:
+          url: https://simonwillison.net/guides/agentic-engineering-patterns/what-is-agentic-engineering/
+        path:
+          en: docs/en/01-principles/01-what-is-agentic-engineering.md
+          ko: docs/ko/01-principles/01-what-is-agentic-engineering.md
+
+      - id: writing-code-is-cheap-now
+        order: 2
         title:
           en: Writing code is cheap now
           ko: 이제 코드는 싸다
         source:
           url: https://simonwillison.net/guides/agentic-engineering-patterns/code-is-cheap/
         path:
-          en: docs/en/01-principles/01-writing-code-is-cheap-now.md
-          ko: docs/ko/01-principles/01-writing-code-is-cheap-now.md
+          en: docs/en/01-principles/02-writing-code-is-cheap-now.md
+          ko: docs/ko/01-principles/02-writing-code-is-cheap-now.md
 
       - id: hoard-things-you-know-how-to-do
-        order: 2
+        order: 3
         title:
           en: Hoard things you know how to do
           ko: 할 줄 아는 것을 모아두라
         source:
           url: https://simonwillison.net/guides/agentic-engineering-patterns/hoard-things-you-know-how-to-do/
         path:
-          en: docs/en/01-principles/02-hoard-things-you-know-how-to-do.md
-          ko: docs/ko/01-principles/02-hoard-things-you-know-how-to-do.md
+          en: docs/en/01-principles/03-hoard-things-you-know-how-to-do.md
+          ko: docs/ko/01-principles/03-hoard-things-you-know-how-to-do.md
+
+      - id: ai-should-help-us-produce-better-code
+        order: 4
+        title:
+          en: AI should help us produce better code
+          ko: AI는 더 나은 코드를 생산하는 데 도움이 되어야 합니다
+        source:
+          url: https://simonwillison.net/guides/agentic-engineering-patterns/better-code/
+        path:
+          en: docs/en/01-principles/04-ai-should-help-us-produce-better-code.md
+          ko: docs/ko/01-principles/04-ai-should-help-us-produce-better-code.md
+
+      - id: anti-patterns-things-to-avoid
+        order: 5
+        title:
+          en: "Anti-patterns: things to avoid"
+          ko: "안티패턴: 피해야 할 것들"
+        source:
+          url: https://simonwillison.net/guides/agentic-engineering-patterns/anti-patterns/
+        path:
+          en: docs/en/01-principles/05-anti-patterns-things-to-avoid.md
+          ko: docs/ko/01-principles/05-anti-patterns-things-to-avoid.md
+
+  - id: getting-started
+    order: 2
+    title:
+      en: Getting started
+      ko: 시작하기
+    children:
+      - id: how-coding-agents-work
+        order: 1
+        title:
+          en: How coding agents work
+          ko: 코딩 에이전트는 어떻게 작동하는가
+        source:
+          url: https://simonwillison.net/guides/agentic-engineering-patterns/how-coding-agents-work/
+        path:
+          en: docs/en/02-getting-started/01-how-coding-agents-work.md
+          ko: docs/ko/02-getting-started/01-how-coding-agents-work.md
 
   - id: testing-and-qa
     order: 3
@@ -46,8 +96,8 @@ items:
         source:
           url: https://simonwillison.net/guides/agentic-engineering-patterns/red-green-tdd/
         path:
-          en: docs/en/02-testing-and-qa/01-red-green-tdd.md
-          ko: docs/ko/02-testing-and-qa/01-red-green-tdd.md
+          en: docs/en/03-testing-and-qa/01-red-green-tdd.md
+          ko: docs/ko/03-testing-and-qa/01-red-green-tdd.md
 
       - id: first-run-the-tests
         order: 2
@@ -57,11 +107,22 @@ items:
         source:
           url: https://simonwillison.net/guides/agentic-engineering-patterns/first-run-the-tests/
         path:
-          en: docs/en/02-testing-and-qa/02-first-run-the-tests.md
-          ko: docs/ko/02-testing-and-qa/02-first-run-the-tests.md
+          en: docs/en/03-testing-and-qa/02-first-run-the-tests.md
+          ko: docs/ko/03-testing-and-qa/02-first-run-the-tests.md
+
+      - id: agentic-manual-testing
+        order: 3
+        title:
+          en: Agentic manual testing
+          ko: 에이전트 수동 테스트
+        source:
+          url: https://simonwillison.net/guides/agentic-engineering-patterns/agentic-manual-testing/
+        path:
+          en: docs/en/03-testing-and-qa/03-agentic-manual-testing.md
+          ko: docs/ko/03-testing-and-qa/03-agentic-manual-testing.md
 
   - id: understanding-code
-    order: 2
+    order: 4
     title:
       en: Understanding code
       ko: 코드 이해하기
@@ -74,5 +135,50 @@ items:
         source:
           url: https://simonwillison.net/guides/agentic-engineering-patterns/linear-walkthroughs/
         path:
-          en: docs/en/03-understanding-code/01-linear-walkthroughs.md
-          ko: docs/ko/03-understanding-code/01-linear-walkthroughs.md
+          en: docs/en/04-understanding-code/01-linear-walkthroughs.md
+          ko: docs/ko/04-understanding-code/01-linear-walkthroughs.md
+
+      - id: interactive-explanations
+        order: 2
+        title:
+          en: Interactive explanations
+          ko: 대화형 설명
+        source:
+          url: https://simonwillison.net/guides/agentic-engineering-patterns/interactive-explanations/
+        path:
+          en: docs/en/04-understanding-code/02-interactive-explanations.md
+          ko: docs/ko/04-understanding-code/02-interactive-explanations.md
+
+  - id: annotated-prompts
+    order: 5
+    title:
+      en: Annotated prompts
+      ko: 주석이 달린 프롬프트
+    children:
+      - id: gif-optimization-tool-using-webassembly-and-gifsicle
+        order: 1
+        title:
+          en: GIF optimization tool using WebAssembly and Gifsicle
+          ko: WebAssembly와 Gifsicle을 사용한 GIF 최적화 도구
+        source:
+          url: https://simonwillison.net/guides/agentic-engineering-patterns/gif-optimization/
+        path:
+          en: docs/en/05-annotated-prompts/01-gif-optimization-tool-using-webassembly-and-gifsicle.md
+          ko: docs/ko/05-annotated-prompts/01-gif-optimization-tool-using-webassembly-and-gifsicle.md
+
+  - id: appendix
+    order: 6
+    title:
+      en: Appendix
+      ko: 부록
+    children:
+      - id: prompts-i-use
+        order: 1
+        title:
+          en: Prompts I use
+          ko: 내가 사용하는 프롬프트
+        source:
+          url: https://simonwillison.net/guides/agentic-engineering-patterns/prompts/
+        path:
+          en: docs/en/06-appendix/01-prompts-i-use.md
+          ko: docs/ko/06-appendix/01-prompts-i-use.md
