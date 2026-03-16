@@ -1,0 +1,29 @@
+{
+  "name": "agentic-engineering-patterns-simon-willison",
+  "version": "1.0.0",
+  "description": "Guides based on Simon Willison's \"Agentic Engineering Patterns\". https://simonwillison.net/guides/agentic-engineering-patterns/",
+  "main": "site/build.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "node site/build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucas-flatwhite/agentic-engineering-patterns-simon-willison.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucas-flatwhite/agentic-engineering-patterns-simon-willison/issues"
+  },
+  "homepage": "https://github.com/lucas-flatwhite/agentic-engineering-patterns-simon-willison#readme",
+  "dependencies": {
+    "highlight.js": "^11.11.1",
+    "js-yaml": "^4.1.1",
+    "marked": "^17.0.4"
+  }
+}

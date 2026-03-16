@@ -1,2 +1,5 @@
 .DS_Store
 sources/
+node_modules/
+_site/
+.github/workflows/
