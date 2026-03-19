@@ -9,8 +9,9 @@ This is the English guide set.
    3. [Hoard things you know how to do](./01-principles/03-hoard-things-you-know-how-to-do.md)
    4. [AI should help us produce better code](./01-principles/04-ai-should-help-us-produce-better-code.md)
    5. [Anti-patterns: things to avoid](./01-principles/05-anti-patterns-things-to-avoid.md)
-2. Getting started
-   1. [How coding agents work](./02-getting-started/01-how-coding-agents-work.md)
+2. Working with coding agents
+   1. [How coding agents work](./02-working-with-coding-agents/01-how-coding-agents-work.md)
+   2. [Subagents](./02-working-with-coding-agents/02-subagents.md)
 3. Testing and QA
    1. [Red/green TDD](./03-testing-and-qa/01-red-green-tdd.md)
    2. [First run the tests](./03-testing-and-qa/02-first-run-the-tests.md)

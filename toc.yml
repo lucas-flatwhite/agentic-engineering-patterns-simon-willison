@@ -65,11 +65,11 @@ items:
           en: docs/en/01-principles/05-anti-patterns-things-to-avoid.md
           ko: docs/ko/01-principles/05-anti-patterns-things-to-avoid.md
 
-  - id: getting-started
+  - id: working-with-coding-agents
     order: 2
     title:
-      en: Getting started
-      ko: 시작하기
+      en: Working with coding agents
+      ko: 코딩 에이전트와 함께 작업하기
     children:
       - id: how-coding-agents-work
         order: 1
@@ -79,8 +79,19 @@ items:
         source:
           url: https://simonwillison.net/guides/agentic-engineering-patterns/how-coding-agents-work/
         path:
-          en: docs/en/02-getting-started/01-how-coding-agents-work.md
-          ko: docs/ko/02-getting-started/01-how-coding-agents-work.md
+          en: docs/en/02-working-with-coding-agents/01-how-coding-agents-work.md
+          ko: docs/ko/02-working-with-coding-agents/01-how-coding-agents-work.md
+
+      - id: subagents
+        order: 2
+        title:
+          en: Subagents
+          ko: 서브에이전트
+        source:
+          url: https://simonwillison.net/guides/agentic-engineering-patterns/subagents/
+        path:
+          en: docs/en/02-working-with-coding-agents/02-subagents.md
+          ko: docs/ko/02-working-with-coding-agents/02-subagents.md
 
   - id: testing-and-qa
     order: 3
