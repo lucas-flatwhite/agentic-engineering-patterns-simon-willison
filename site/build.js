@@ -230,6 +230,9 @@ function build() {
 
       let mdContent = fs.readFileSync(mdPath, 'utf-8');
 
+      // Remove YAML front matter (---...---) if present
+      mdContent = mdContent.replace(/^---\n[\s\S]*?\n---\n/, '');
+
       // Remove the Source footer line from markdown (we'll add it in template)
       mdContent = mdContent.replace(/\n---\nSource:.*$/s, '');
 

@@ -11,7 +11,8 @@ This is the English guide set.
    5. [Anti-patterns: things to avoid](./01-principles/05-anti-patterns-things-to-avoid.md)
 2. Working with coding agents
    1. [How coding agents work](./02-working-with-coding-agents/01-how-coding-agents-work.md)
-   2. [Subagents](./02-working-with-coding-agents/02-subagents.md)
+   2. [Using Git with coding agents](./02-working-with-coding-agents/02-using-git-with-coding-agents.md)
+   3. [Subagents](./02-working-with-coding-agents/03-subagents.md)
 3. Testing and QA
    1. [Red/green TDD](./03-testing-and-qa/01-red-green-tdd.md)
    2. [First run the tests](./03-testing-and-qa/02-first-run-the-tests.md)

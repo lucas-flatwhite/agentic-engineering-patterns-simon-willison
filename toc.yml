@@ -82,16 +82,27 @@ items:
           en: docs/en/02-working-with-coding-agents/01-how-coding-agents-work.md
           ko: docs/ko/02-working-with-coding-agents/01-how-coding-agents-work.md
 
-      - id: subagents
+      - id: using-git-with-coding-agents
         order: 2
+        title:
+          en: Using Git with coding agents
+          ko: 코딩 에이전트와 Git 함께 사용하기
+        source:
+          url: https://simonwillison.net/guides/agentic-engineering-patterns/using-git-with-coding-agents/
+        path:
+          en: docs/en/02-working-with-coding-agents/02-using-git-with-coding-agents.md
+          ko: docs/ko/02-working-with-coding-agents/02-using-git-with-coding-agents.md
+
+      - id: subagents
+        order: 3
         title:
           en: Subagents
           ko: 서브에이전트
         source:
           url: https://simonwillison.net/guides/agentic-engineering-patterns/subagents/
         path:
-          en: docs/en/02-working-with-coding-agents/02-subagents.md
-          ko: docs/ko/02-working-with-coding-agents/02-subagents.md
+          en: docs/en/02-working-with-coding-agents/03-subagents.md
+          ko: docs/ko/02-working-with-coding-agents/03-subagents.md
 
   - id: testing-and-qa
     order: 3
