@@ -2,7 +2,7 @@
 
 As with any tool, understanding how [coding agents](https://simonwillison.net/guides/agentic-engineering-patterns/what-is-agentic-engineering/) work under the hood can help you make better decisions about how to apply them.
 
-A coding agent is a piece of software that acts as a harness for an LLM, extending that LLM with additional capabilities that are powered by invisible prompts and implemented as callable tools.
+A coding agent is a piece of software that acts as a **harness** for an LLM, extending that LLM with additional capabilities that are powered by invisible prompts and implemented as callable tools.
 
 ## Large Language Models
 
@@ -16,21 +16,22 @@ LLMs don't actually work directly with words - they work with tokens. A sequence
 
 You can experiment with the OpenAI tokenizer to see how this works at [platform.openai.com/tokenizer](https://platform.openai.com/tokenizer).
 
-The input to an LLM is called the prompt. The text returned by an LLM is called the completion, or sometimes the response.
+The input to an LLM is called the **prompt**. The text returned by an LLM is called the **completion**, or sometimes the **response**.
 
-Many models today are multimodal, which means they can accept more than just text as input. Vision LLMs (vLLMs) can accept images as part of the input, which means you can feed them sketches or photos or screenshots. A common misconception is that these are run through a separate process for OCR or image analysis, but these inputs are actually turned into yet more token integers which are processed in the same way as text.
+Many models today are **multimodal**, which means they can accept more than just text as input.  **Vision LLMs** (vLLMs) can accept images as part of the input, which means you can feed them sketches or photos or screenshots. A common misconception is that these are run through a separate process for OCR or image analysis, but these inputs are actually turned into yet more token integers which are processed in the same way as text.
 
 ## Chat templated prompts
 
 The first LLMs worked as completion engines - users were expected to provide a prompt which could then be completed by the model, such as the two examples shown above.
 
-This wasn't particularly user-friendly so models mostly switched to using chat templated prompts instead, which represent communication with the model as a simulated conversation.
+This wasn't particularly user-friendly so models mostly switched to using **chat templated prompts** instead, which represent communication with the model as a simulated conversation.
 
 This is actually just a form of completion prompt with a special format that looks something like this.
 
 ```
 user: write a python function to download a file from a URL
 assistant:
+
 ```
 
 The natural completion for this prompt is for the assistant (represented by the LLM) to answer the user's question with some Python code.
@@ -45,19 +46,20 @@ assistant: def download_url(url):
     return urllib.request.urlopen(url).read()
 user: use the requests library instead
 assistant:
+
 ```
 
 Since providers charge for both input and output tokens, this means that as a conversation gets longer, each prompt becomes more expensive since the number of input tokens grows every time.
 
 ## Token caching
 
-Most model providers offset this somewhat through a cheaper rate for cached input tokens - common token prefixes that have been processed within a short time period can be charged at a lower rate as the underlying infrastructure can cache and then reuse many of the expensive calculations used to process that input.
+Most model providers offset this somewhat through a cheaper rate for **cached input tokens** - common token prefixes that have been processed within a short time period can be charged at a lower rate as the underlying infrastructure can cache and then reuse many of the expensive calculations used to process that input.
 
 Coding agents are designed with this optimization in mind - they avoid modifying earlier conversation content to ensure the cache is used as efficiently as possible.
 
 ## Calling tools
 
-The defining feature of an LLM agent is that agents can call tools. But what is a tool?
+The defining feature of an LLM **agent** is that agents can call **tools**. But what is a tool?
 
 A tool is a function that the agent harness makes available to the LLM.
 
@@ -67,12 +69,14 @@ At the level of the prompt itself, that looks something like this:
 system: If you need to access the weather, end your turn with <tool>get_weather(city_name)</tool>
 user: what's the weather in San Francisco?
 assistant:
+
 ```
 
 Here the assistant might respond with the following text:
 
 ```
 <tool>get_weather("San Francisco")</tool>
+
 ```
 
 The model harness software then extracts that function call request from the response - probably with a regular expression - and executes the tool.
@@ -85,6 +89,7 @@ user: what's the weather in San Francisco?
 assistant: <tool>get_weather("San Francisco")</tool>
 user: <tool-result>61°, Partly cloudy</tool-result>
 assistant:
+
 ```
 
 The LLM can now use that tool result to help generate an answer to the user's question.
@@ -97,13 +102,13 @@ In the previous example I included an initial message marked "system" which info
 
 Coding agents usually start every conversation with a system prompt like this, which is not shown to the user but provides instructions telling the model how it should behave.
 
-These system prompts can be hundreds of lines long. Here's [the system prompt for OpenAI Codex](https://gist.github.com/simonw/17391888e3c651a24e4d5b312368133b) as-of March 2026, which is a useful clear example of the kind of instructions that make these coding agents work.
+These system prompts can be hundreds of lines long. Here's [the system prompt for OpenAI Codex](https://github.com/openai/codex/blob/rust-v0.114.0/codex-rs/core/templates/model_instructions/gpt-5.2-codex_instructions_template.md) as-of March 2026, which is a useful clear example of the kind of instructions that make these coding agents work.
 
 ## Reasoning
 
-One of the big new advances in 2025 was the introduction of reasoning to the frontier model families.
+One of the big new advances in 2025 was the introduction of **reasoning** to the frontier model families.
 
-Reasoning, sometimes presented as thinking in the UI, is when a model spends additional time generating text that talks through the problem and its potential solutions before presenting a reply to the user.
+Reasoning, sometimes presented as **thinking** in the UI, is when a model spends additional time generating text that talks through the problem and its potential solutions before presenting a reply to the user.
 
 This can look similar to a person thinking out loud, and has a similar effect. Crucially it allows models to spend more time (and more tokens) working on a problem in order to hopefully get a better result.
 
@@ -117,7 +122,4 @@ Believe it or not, that's most of what it takes to build a coding agent!
 
 If you want to develop a deeper understanding of how these things work, a useful exercise is to try building your own agent from scratch. A simple tool loop can be achieved with a few dozen lines of code on top of an existing LLM API.
 
-A good tool loop is a great deal more work than that, but the fundamental mechanics are surprisingly straightforward.
-
----
-Source: https://simonwillison.net/guides/agentic-engineering-patterns/how-coding-agents-work/
+A _good_ tool loop is a great deal more work than that, but the fundamental mechanics are surprisingly straightforward.

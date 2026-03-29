@@ -12,16 +12,10 @@
 
 기존 프로젝트에서 에이전트로 새 세션을 시작할 때마다 저는 보통 아래와 비슷한 프롬프트로 시작합니다:
 
-```
 First run the tests
-```
 
 제 Python 프로젝트에서는 [pyproject.toml 설정](https://til.simonwillison.net/uv/dependency-groups)을 해두어서 대신 이렇게 프롬프트할 수 있습니다:
-
-```
 Run "uv run pytest"
-```
-
 이 네 단어짜리 프롬프트는 여러 목적을 동시에 수행합니다:
 
 1.  테스트 스위트가 존재한다는 사실을 에이전트에 알려주고, 테스트 실행 방법을 스스로 파악하게 만듭니다. 이렇게 하면 이후에도 무언가를 망가뜨리지 않았는지 확인하기 위해 테스트를 실행할 가능성이 매우 높아집니다.
@@ -29,6 +23,3 @@ Run "uv run pytest"
 3.  에이전트를 테스트 중심 사고방식으로 전환시킵니다. 한 번 테스트를 실행하고 나면, 이후 스스로 테스트를 확장하는 행동으로 자연스럽게 이어집니다.
 
 ["Use red/green TDD"](https://simonwillison.net/guides/agentic-engineering-patterns/red-green-tdd/)와 마찬가지로, "First run the tests" 역시 모델에 이미 내재된 상당한 소프트웨어 엔지니어링 규율을 압축해서 전달하는 네 단어 프롬프트입니다.
-
----
-Source: https://simonwillison.net/guides/agentic-engineering-patterns/first-run-the-tests/

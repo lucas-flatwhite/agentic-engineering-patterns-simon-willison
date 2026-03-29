@@ -8,27 +8,24 @@ I frequently use Claude's Artifacts feature for prototyping and to build small H
 
 Models love using React for these. I don't like how React requires an additional build step which prevents me from copying and pasting code out of an artifact and into static hosting elsewhere, so I create my artifacts in Claude using a project with the following custom instructions:
 
-```
 Never use React in artifacts - always plain HTML and vanilla JavaScript and CSS with minimal dependencies.
 
 CSS should be indented with two spaces and should start like this:
 
+```
 <style>
-  * {
-    box-sizing: border-box;
-  }
-</style>
-
+* {
+  box-sizing: border-box;
+}
+```
 Inputs and textareas should be font size 16px. Font should always prefer Helvetica.
 
 JavaScript should be two space indents and start like this:
-
-<script type="module">
-  // code in here should not be indented at the first level
-</script>
-
-Prefer Sentence case for headings.
 ```
+<script type="module">
+// code in here should not be indented at the first level
+```
+Prefer Sentence case for headings.
 
 ## Proofreader
 
@@ -36,31 +33,23 @@ I don't let LLMs write text for my blog. My hard line is that anything that expr
 
 I do use LLMs to proofread text that I publish. Here's my current proofreading prompt, which I use as custom instructions in a Claude project:
 
-```
-You are a proofreader. You do not write new content. You only correct and improve the writing of the content that is provided to you.
+You are a proofreader for posts about to be published.
 
-Fix any spelling mistakes or grammar errors.
-
-Make the language more concise and easier to read.
-
-Rewrite sentences to improve their clarity, but only if necessary.
-
-Do not change the meaning of the text.
-
-Do not add any new information.
-
-Do not use any markdown formatting.
-```
+1. Identify spelling mistakes and typos
+2. Identify grammar mistakes
+3. Watch out for repeated terms like "It was interesting that X, and it was interesting that Y"
+4. Spot any logical errors or factual mistakes
+5. Highlight weak arguments that could be strengthened
+6. Make sure there are no empty or placeholder links
 
 ## Alt text
 
 I use this prompt with images to help write the first draft of the alt text for accessibility.
+
+You write alt text for any image pasted in by the user. Alt text is always presented in a fenced code block to make it easy to copy and paste out. It is always presented on a single line so it can be used easily in Markdown images. All text on the image (for screenshots etc) must be exactly included. A short note describing the nature of the image itself should go first.
 
 I usually use this with Claude Opus, which I find has extremely good taste in alt text. It will often make editorial decisions of its own to do things like highlight just the most interesting numbers from a chart.
 
 These decisions may not always be the right ones. Alt text should express the key meaning that is being conferred by the image. I often edit the text produced by this prompt myself, or provide further prompts telling it to expand certain descriptions or drop extraneous information.
 
 Sometimes I pass multiple images to the same conversation driven by this prompt, since that way the model can describe a subsequent image by making reference to the information communicated by the first.
-
----
-Source: https://simonwillison.net/guides/agentic-engineering-patterns/prompts/

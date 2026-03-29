@@ -8,7 +8,7 @@ Frontier models with the right agent harness can construct a detailed walkthroug
 
 ## An example using Showboat and Present
 
-I recently vibe coded a SwiftUI slide presentation app on my Mac using Claude Code and Opus 4.6.
+I recently [vibe coded a SwiftUI slide presentation app](https://simonwillison.net/2026/Feb/25/present/) on my Mac using Claude Code and Opus 4.6.
 
 I was speaking about the advances in frontier models between November 2025 and February 2026, and I like to include at least one gimmick in my talks (a [STAR moment](https://simonwillison.net/2019/Dec/10/better-presentations/) - Something They'll Always Remember). In this case I decided the gimmick would be revealing at the end of the presentation that the slide mechanism itself was an example of what vibe coding could do.
 
@@ -16,9 +16,9 @@ I released the code [to GitHub](https://github.com/simonw/present) and then real
 
 So I fired up a new instance of Claude Code for web, pointed it at my repo and prompted:
 
-> Read the source and then plan a linear walkthrough of the code that explains how it all works in detail
->
-> Then run "uvx showboat –help" to learn showboat - use showboat to create a walkthrough.md file in the repo and build the walkthrough in there, using showboat note for commentary and showboat exec plus sed or grep or cat or whatever you need to include snippets of code you are talking about
+Read the source and then plan a linear walkthrough of the code that explains how it all works in detail
+
+Then run “uvx showboat –help” to learn showboat - use showboat to create a walkthrough.md file in the repo and build the walkthrough in there, using showboat note for commentary and showboat exec plus sed or grep or cat or whatever you need to include snippets of code you are talking about
 
 [Showboat](https://github.com/simonw/showboat) is a tool I built to help coding agents write documents that demonstrate their work. You can see the [showboat --help output here](https://github.com/simonw/showboat/blob/main/help.txt), which is designed to give the model everything it needs to know in order to use the tool.
 
@@ -30,7 +30,4 @@ This worked extremely well. Here's the [document Claude Code created with Showbo
 
 I learned a great deal about how SwiftUI apps are structured and absorbed some solid details about the Swift language itself just from reading this document.
 
-If you are concerned that LLMs might reduce the speed at which you learn new skills I strongly recommend adopting patterns like this one. Even a ~40 minute vibe coded toy project can become an opportunity to explore new ecosystems and pick up some interesting new tricks.
-
----
-Source: https://simonwillison.net/guides/agentic-engineering-patterns/linear-walkthroughs/
+If you are concerned that LLMs might reduce the speed at which you learn new skills I strongly recommend adopting patterns like this one.  Even a ~40 minute vibe coded toy project can become an opportunity to explore new ecosystems and pick up some interesting new tricks.

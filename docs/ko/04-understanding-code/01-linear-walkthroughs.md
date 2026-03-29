@@ -8,7 +8,7 @@
 
 ## Showboat와 Present를 사용한 예시
 
-최근 저는 Claude Code와 Opus 4.6을 사용해 Mac에서 SwiftUI 슬라이드 프레젠테이션 앱을 바이브 코딩으로 만들었습니다.
+최근 저는 Claude Code와 Opus 4.6을 사용해 Mac에서 [SwiftUI 슬라이드 프레젠테이션 앱을 바이브 코딩으로 만들었습니다](https://simonwillison.net/2026/Feb/25/present/).
 
 2025년 11월부터 2026년 2월까지 프런티어 모델의 발전에 대해 발표할 예정이었고, 저는 발표에 최소 하나의 장치를 넣는 것을 좋아합니다([STAR moment](https://simonwillison.net/2019/Dec/10/better-presentations/) - Something They'll Always Remember). 이번에는 발표 마지막에 슬라이드 메커니즘 자체가 바이브 코딩이 할 수 있는 것의 예시였다는 사실을 공개하는 것을 그 장치로 정했습니다.
 
@@ -16,9 +16,9 @@
 
 그래서 Claude Code for web의 새 인스턴스를 띄우고, 저장소를 지정한 뒤 다음과 같이 프롬프트했습니다:
 
-> Read the source and then plan a linear walkthrough of the code that explains how it all works in detail
->
-> Then run "uvx showboat –help" to learn showboat - use showboat to create a walkthrough.md file in the repo and build the walkthrough in there, using showboat note for commentary and showboat exec plus sed or grep or cat or whatever you need to include snippets of code you are talking about
+Read the source and then plan a linear walkthrough of the code that explains how it all works in detail
+
+Then run “uvx showboat –help” to learn showboat - use showboat to create a walkthrough.md file in the repo and build the walkthrough in there, using showboat note for commentary and showboat exec plus sed or grep or cat or whatever you need to include snippets of code you are talking about
 
 [Showboat](https://github.com/simonw/showboat)는 코딩 에이전트가 자신의 작업 과정을 보여주는 문서를 작성하도록 돕기 위해 제가 만든 도구입니다. 도구 사용에 모델이 필요로 하는 정보를 모두 담도록 설계된 [showboat --help 출력](https://github.com/simonw/showboat/blob/main/help.txt)도 확인할 수 있습니다.
 
@@ -30,7 +30,4 @@
 
 저는 이 문서를 읽는 것만으로 SwiftUI 앱 구조에 대해 많은 것을 배웠고, Swift 언어 자체에 대한 탄탄한 디테일도 흡수할 수 있었습니다.
 
-LLM이 새로운 기술을 배우는 속도를 떨어뜨릴까 걱정된다면, 이런 패턴을 강력히 권장합니다. 바이브 코딩으로 만든 40분짜리 작은 프로젝트조차 새로운 생태계를 탐색하고 흥미로운 새 기법을 익힐 기회가 될 수 있습니다.
-
----
-Source: https://simonwillison.net/guides/agentic-engineering-patterns/linear-walkthroughs/
+LLM이 새로운 기술을 배우는 속도를 떨어뜨릴까 걱정된다면, 이런 패턴을 강력히 권장합니다. 바이브 코딩으로 만든 약 40분짜리 작은 프로젝트조차 새로운 생태계를 탐색하고 흥미로운 새 기법을 익힐 기회가 될 수 있습니다.

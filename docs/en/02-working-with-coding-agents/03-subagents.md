@@ -16,21 +16,21 @@ Any time you start a new task against an existing repo Claude Code first needs t
 
 It does this by constructing a prompt and dispatching a subagent to perform that exploration and return a description of what it finds.
 
-I kicked off a Claude Code session with a screenshot of a page from my guide and this prompt:
+I kicked off a Claude Code session with a screenshot of [a page from my guide](https://simonwillison.net/guides/agentic-engineering-patterns/linear-walkthroughs/changes/) and this prompt:
 
 > Make the chapter diffs also show which characters have changed in this diff view with a darker color of red or green for the individually changed segments of text within the line
 
-Here's the transcript of that session.
+Here's [the transcript](https://gisthost.github.io/?effbdc564939b88fe5c6299387e217da/index.html) of that session.
 
 Claude Code started by running an “Explore” subagent with the following starter prompt:
 
 > Find the code that implements the diff view for "chapters" in this Django blog. I need to find:
-> 
+>
 > 1.  Templates that render diffs (look for diff-related HTML/CSS with red/green backgrounds)
 > 2.  Python code that generates diffs (look for difflib usage or similar)
 > 3.  Any JavaScript related to diff rendering
 > 4.  CSS styles for the diff view (red/green line backgrounds)
-> 
+>
 > Search thoroughly - check templates/, static/, blog/ directories. Look for keywords like "diff", "chapter", "revision", "history", "compare".
 
 Subagents work similar to any other tool call: the parent agent dispatches them just as they would any other tool and waits for the response. It's interesting to see models prompt themselves in this way - they generally have good taste in prompting strategies.
@@ -38,14 +38,14 @@ Subagents work similar to any other tool call: the parent agent dispatches them 
 The Explore subagent churned away for a few seconds and returned a response that started like this:
 
 > Perfect! Now let me create a comprehensive summary with all the findings:
-> 
+>
 > ### Summary: Chapter Diff View Implementation
-> 
+>
 > I found the complete implementation of the diff view for chapters in this Django blog. Here are the key components:
-> 
-> #### 1. Python Code - Diff Generation (`/home/user/simonwillisonblog/guides/views.py`, lines 139-202)
-> 
-> The `chapter_changes()` view function uses Python's built-in `difflib.unified_diff()` to generate diffs: [...]
+>
+> #### 1. **Python Code - Diff Generation** (`/home/user/simonwillisonblog/guides/views.py`, lines 139-202)
+>
+> The `chapter_changes()` view function uses Python's built-in `difflib.unified_diff()` to generate diffs: […]
 
 The full subagent response included all of the details the parent agent needed in order to start editing the code to address my original request.
 
@@ -57,8 +57,8 @@ Subagents can also provide a significant performance boost by having the parent 
 
 Coding agents that support subagents can use them based on your instructions. Try prompts like this:
 
-`Use subagents to find and update all of the templates that are affected by this change.`
-
+`Use subagents to find and update all of the templates that are affected by this change.
+`
 For tasks that involve editing several files - and where those files are not dependent on each other - this can offer a significant speed boost.
 
 ## Specialist subagents
@@ -77,10 +77,10 @@ While it can be tempting to go overboard breaking up tasks across dozens of diff
 
 Several popular coding agents support subagents, each with their own documentation on how to use them:
 
-*   OpenAI Codex subagents
-*   Claude subagents
-*   Gemini CLI subagents
-*   Mistral Vibe subagents
-*   OpenCode agents
-*   Subagents in Visual Studio Code
-*   Cursor Subagents
+*   [OpenAI Codex subagents](https://developers.openai.com/codex/subagents/)
+*   [Claude subagents](https://code.claude.com/docs/en/sub-agents)
+*   [Gemini CLI subagents](https://geminicli.com/docs/core/subagents/)
+*   [Mistral Vibe subagents](https://docs.mistral.ai/mistral-vibe/agents-skills#agent-selection)
+*   [OpenCode agents](https://opencode.ai/docs/agents/)
+*   [Subagents in Visual Studio Code](https://code.visualstudio.com/docs/copilot/agents/subagents)
+*   [Cursor Subagents](https://cursor.com/docs/subagents)

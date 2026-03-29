@@ -18,11 +18,4 @@ Every good model understands "red/green TDD" as a shorthand for the much longer 
 
 Example prompt:
 
-> Build a Python function to extract headers from a markdown string. Use red/green TDD.
-
-Here's what I got [from Claude](https://claude.ai/share/2b9b952a-149b-4864-afb0-46f59b90b458) and [from ChatGPT](https://chatgpt.com/share/699beb6f-adc8-8006-a706-6bbfdcdca538). Normally I would use a coding agent like Claude Code or OpenAI Codex, but this example is simple enough that both Claude and ChatGPT can implement it using their default code environments.
-
-(I did have to append "Use your code environment" to the ChatGPT prompt. When I tried without that it wrote the code and tests without actually executing them.)
-
----
-Source: https://simonwillison.net/guides/agentic-engineering-patterns/red-green-tdd/
+Build a Python function to extract headers from a markdown string. Use red/green TDD.

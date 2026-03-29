@@ -1,121 +1,109 @@
-
 # WebAssembly와 Gifsicle을 사용한 GIF 최적화 도구
 
-저는 온라인 글에 애니메이션 GIF 데모를 포함하는 것을 좋아하며, 종종 LICEcap을 사용하여 녹화합니다. 대화형 설명 챕터에 예시가 있습니다.
+저는 온라인 글에 애니메이션 GIF 데모를 포함하는 것을 좋아하며, 종종 [LICEcap](https://www.cockos.com/licecap/)을 사용하여 녹화합니다. [Interactive explanations](https://simonwillison.net/guides/agentic-engineering-patterns/interactive-explanations/) 챕터에 예시가 있습니다.
 
-이러한 GIF는 꽤 클 수 있습니다. GIF 파일 크기를 최적화하기 위해 몇 가지 도구를 사용해 보았는데, 제가 가장 좋아하는 것은 Eddie Kohler의 Gifsicle입니다. 프레임에서 변경되지 않은 영역을 식별하고 차이점만 저장하여 GIF를 압축하며, 선택적으로 GIF 색상 팔레트를 줄이거나 눈에 보이는 손실 압축을 적용하여 크기를 더 줄일 수 있습니다.
+이러한 GIF는 꽤 클 수 있습니다. GIF 파일 크기를 최적화하기 위해 몇 가지 도구를 사용해 보았는데, 제가 가장 좋아하는 것은 Eddie Kohler의 [Gifsicle](https://github.com/kohler/gifsicle)입니다. 프레임에서 변경되지 않은 영역을 식별하고 차이점만 저장하여 GIF를 압축하며, 선택적으로 GIF 색상 팔레트를 줄이거나 눈에 보이는 손실 압축을 적용하여 크기를 더 줄일 수 있습니다.
 
 Gifsicle은 C로 작성되었으며 기본 인터페이스는 명령줄 도구입니다. 저는 브라우저에서 액세스하고 다양한 설정을 시각적으로 미리 보고 비교할 수 있도록 웹 인터페이스를 원했습니다.
 
-저는 제 `simonw/tools` 리포지토리에 대해 다음과 같이 Claude Code for web(Claude iPhone 앱을 사용하여 제 iPhone에서)에 프롬프트를 보냈습니다.
+저는 제 [simonw/tools](https://github.com/simonw/tools) 리포지토리에 대해 다음과 같이 Claude Code for web(Claude iPhone 앱을 사용하여 제 iPhone에서)에 프롬프트를 보냈습니다.
 
-```
 gif-optimizer.html
 
-gifsicle을 WASM으로 컴파일한 다음, 애니메이션 GIF를 열거나 드래그 앤 드롭할 수 있는 웹 페이지를 구축하여, 다양한 설정으로 gifsicle을 사용하여 압축된 GIF를 보여주고, 각 미리보기에는 크기와 다운로드 버튼이 표시되도록 합니다.
+Compile gifsicle to WASM, then build a web page that lets you open or drag-drop an animated GIF onto it and it then shows you that GIF compressed using gifsicle with a number of different settings, each preview with the size and a download button
 
-수동 사용을 위한 gifsicle 옵션에 대한 컨트롤도 포함합니다. 각 미리보기에는 해당 미리보기에 사용된 수동 설정을 설정하는 "이 설정 조정" 링크가 있어 사용자가 추가로 사용자 지정할 수 있습니다.
+Also include controls for the gifsicle options for manual use - each preview has a “tweak these settings” link which sets those manual settings to the ones used for that preview so the user can customize them further
 
-"uvx rodney --help"를 실행하고 해당 도구를 사용하여 작업을 시도해 보세요. 테스트에는 이 GIF를 사용하세요. https://static.simonwillison.net/static/2026/animated-word-cloud-demo.gif
-```
+Run “uvx rodney –help” and use that tool to tray your work - use this GIF for testing https://static.simonwillison.net/static/2026/animated-word-cloud-demo.gif
 
-다음은 그것이 만든 것과, 제가 도구를 사용하여 최적화한 애니메이션 GIF 데모입니다.
+다음은 [그것이 만든 것](https://tools.simonwillison.net/gif-optimizer)과, 제가 도구를 사용하여 최적화한 애니메이션 GIF 데모입니다.
 
-![GIF 최적화 도구](https://static.simonwillison.net/static/2026/animated-word-cloud-demo.gif)
+![Animation. I drop on a GIF and the tool updates the page with a series of optimized versions under different settings. I eventually select Tweak settings on one of them, scroll to the bottom, adjust some sliders and download the result.](https://static.simonwillison.net/static/2026/demo2-32-colors-lossy.gif)
 
 해당 프롬프트를 하나씩 살펴보겠습니다.
 
-### `gif-optimizer.html`
+> `gif-optimizer.html`
 
 첫 번째 줄은 단순히 만들고 싶은 파일의 이름을 알려줍니다. 여기서는 파일 이름만으로도 충분합니다. Claude가 리포지토리에서 "ls"를 실행하면 모든 파일이 다른 도구라는 것을 이해할 것이라는 것을 알고 있습니다.
 
-제 `simonw/tools` 리포지토리에는 현재 `CLAUDE.md` 또는 `AGENTS.md` 파일이 없습니다. 에이전트가 기존 파일 트리를 스캔하고 기존 파일의 관련 코드를 보는 것만으로도 리포지토리의 요점을 충분히 파악한다는 것을 발견했습니다.
+제 [simonw/tools](https://github.com/simonw/tools) 리포지토리에는 현재 `CLAUDE.md` 또는 `AGENTS.md` 파일이 없습니다. 에이전트가 기존 파일 트리를 스캔하고 기존 파일의 관련 코드를 보는 것만으로도 리포지토리의 요점을 충분히 파악한다는 것을 발견했습니다.
 
-### `gifsicle을 WASM으로 컴파일...`
-
-> `gifsicle을 WASM으로 컴파일한 다음, 애니메이션 GIF를 열거나 드래그 앤 드롭할 수 있는 웹 페이지를 구축하여, 다양한 설정으로 gifsicle을 사용하여 압축된 GIF를 보여주고, 각 미리보기에는 크기와 다운로드 버튼이 표시되도록 합니다.`
+> `Compile gifsicle to WASM, then build a web page that lets you open or drag-drop an animated GIF onto it and it then shows you that GIF compressed using gifsicle with a number of different settings, each preview with the size and a download button`
 
 저는 여기서 Claude의 기존 지식에 대해 많은 가정을 하고 있는데, 모두 성공적이었습니다.
 
 Gifsicle은 이제 거의 30년이 되었고 널리 사용되는 소프트웨어입니다. 이름으로 참조하는 것만으로도 Claude가 코드를 찾는 데 충분할 것이라고 확신했습니다.
 
-"`gifsicle을 WASM으로 컴파일`"은 여기서 _많은_ 작업을 수행합니다.
+"`Compile gifsicle to WASM`"은 여기서 _많은_ 작업을 수행합니다.
 
-WASM은 WebAssembly의 약자로, 브라우저가 샌드박스에서 컴파일된 코드를 안전하게 실행할 수 있도록 하는 기술입니다.
+WASM은 브라우저가 샌드박스에서 컴파일된 코드를 안전하게 실행할 수 있도록 하는 기술인 [WebAssembly](https://webassembly.org/)의 약자입니다.
 
-Gifsicle과 같은 프로젝트를 WASM으로 컴파일하는 것은 일반적으로 Emscripten 프로젝트를 포함하는 복잡한 도구 체인을 포함하는 사소한 작업이 아닙니다. 모든 것이 작동하도록 하려면 많은 시행착오가 필요합니다.
+Gifsicle과 같은 프로젝트를 WASM으로 컴파일하는 것은 일반적으로 [Emscripten](https://emscripten.org/) 프로젝트를 포함하는 복잡한 도구 체인을 포함하는 사소한 작업이 아닙니다. 모든 것이 작동하도록 하려면 많은 시행착오가 필요합니다.
 
 코딩 에이전트는 시행착오에 환상적입니다! 다섯 번째 이해할 수 없는 컴파일러 오류 후에 제가 포기했을 해결책을 종종 무차별 대입으로 해결할 수 있습니다.
 
 저는 Claude Code가 이전에 여러 번 WASM 빌드를 알아내는 것을 보았기 때문에 이것이 작동할 것이라고 확신했습니다.
 
-"`그런 다음 애니메이션 GIF를 열거나 드래그 앤 드롭할 수 있는 웹 페이지를 구축합니다`"는 제가 다른 많은 도구에서 사용한 패턴을 설명합니다.
+"`then build a web page that lets you open or drag-drop an animated GIF onto it`"는 제가 다른 많은 도구에서 사용한 패턴을 설명합니다.
 
 HTML 파일 업로드는 파일 선택에 잘 작동하지만, 특히 데스크톱에서 더 나은 UI는 사용자가 페이지의 눈에 띄는 드롭 존에 파일을 드래그 앤 드롭할 수 있도록 하는 것입니다.
 
 이를 설정하려면 이벤트를 처리하기 위한 약간의 JavaScript와 드롭 존을 위한 일부 CSS가 필요합니다. 복잡하지는 않지만 제가 직접 추가하지 않을 만큼의 추가 작업입니다. 프롬프트를 사용하면 거의 무료입니다.
 
-다음은 결과 UI입니다. Claude가 제 기존 `image-resize-quality` 도구를 살짝 엿본 것에 영향을 받았습니다.
+다음은 결과 UI입니다. Claude가 제 기존 [image-resize-quality](https://tools.simonwillison.net/image-resize-quality) 도구를 살짝 엿본 것에 영향을 받았습니다.
 
-![GIF 최적화 도구 UI](https://static.simonwillison.net/static/2026/gif-optimizer-ui.jpg)
+![Screenshot of a web application titled "GIF Optimizer" with subtitle "Powered by gifsicle compiled to WebAssembly — all processing happens in your browser". A large dashed-border drop zone reads "Drop an animated GIF here or click to select". Below is a text input with placeholder "Or paste a GIF URL..." and a blue "Load URL" button. Footer text reads "Built with gifsicle by Eddie Kohler, compiled to WebAssembly. gifsicle is released under the GNU General Public License, version 2."](https://static.simonwillison.net/static/2026/gif-optimizer.jpg)
 
 GIF URL 입력을 요청하지 않았고, 개방형 CORS 헤더로 제공되는 GIF URL에 대해서만 작동하기 때문에 별로 좋아하지 않습니다. 향후 업데이트에서 제거할 것입니다.
 
-"`그런 다음 다양한 설정으로 gifsicle을 사용하여 압축된 GIF를 보여주고, 각 미리보기에는 크기와 다운로드 버튼이 표시됩니다`"는 애플리케이션의 핵심 기능을 설명합니다.
+"`then shows you that GIF compressed using gifsicle with a number of different settings, each preview with the size and a download button`"는 애플리케이션의 핵심 기능을 설명합니다.
 
 저는 제가 원하는 설정 모음을 정의하는 데 신경 쓰지 않았습니다. 제 경험상 Claude는 저를 위해 그것들을 선택하는 데 충분히 좋은 취향을 가지고 있으며, 첫 번째 추측이 작동하지 않으면 언제든지 변경할 수 있습니다.
 
 크기를 표시하는 것은 크기 최적화에 관한 것이므로 중요합니다.
 
-과거 경험을 통해 "다운로드 버튼"을 요청하면 클릭 시 파일 저장 대화 상자를 제공하는 올바른 HTML 및 JavaScript 메커니즘이 설정된 버튼을 얻을 수 있다는 것을 알고 있습니다. 이는 마우스 오른쪽 버튼을 클릭하여 다른 이름으로 저장할 필요가 없는 편리함입니다.
+과거 경험을 통해 "download button"을 요청하면 클릭 시 파일 저장 대화 상자를 제공하는 올바른 HTML 및 JavaScript 메커니즘이 설정된 버튼을 얻을 수 있다는 것을 알고 있습니다. 이는 마우스 오른쪽 버튼을 클릭하여 다른 이름으로 저장할 필요가 없는 편리함입니다.
 
-### `gifsicle 옵션에 대한 컨트롤도 포함...`
-
-> `수동 사용을 위한 gifsicle 옵션에 대한 컨트롤도 포함합니다. 각 미리보기에는 해당 미리보기에 사용된 수동 설정을 설정하는 "이 설정 조정" 링크가 있어 사용자가 추가로 사용자 지정할 수 있습니다.`
+> `Also include controls for the gifsicle options for manual use - each preview has a “tweak these settings” link which sets those manual settings to the ones used for that preview so the user can customize them further`
 
 이것은 꽤 서투른 프롬프트입니다. 결국 제 휴대폰으로 입력하고 있었으니까요. 하지만 제 의도를 Claude가 원하는 것을 만들기에 충분히 잘 표현했습니다.
 
-결과 도구에서 어떻게 보이는지 보여주는 스크린샷은 모바일 버전을 보여줍니다. 각 이미지에는 "이 설정 조정" 버튼이 있으며, 클릭하면 이 수동 설정 및 슬라이더 세트가 업데이트됩니다.
+결과 도구에서 어떻게 보이는지 보여주는 스크린샷은 모바일 버전을 보여줍니다. 각 이미지에는 "Tweak these settings" 버튼이 있으며, 클릭하면 이 수동 설정 및 슬라이더 세트가 업데이트됩니다.
 
-![GIF 최적화 도구 모바일 UI](https://static.simonwillison.net/static/2026/gif-optimizer-mobile.jpg)
+![Screenshot of a GIF Optimizer results and settings panel. At top, results show "110.4 KB (original: 274.0 KB) — 59.7% smaller" in green, with a blue "Download" button and a "Tweak these settings" button. Below is a "Manual Settings" card containing: "Optimization level" dropdown set to "-O3 (aggressive)", "Lossy (0 = off, higher = more loss)" slider set to 0, "Colors (0 = unchanged)" slider set to 0, "Color reduction method" dropdown set to "Default", "Scale (%)" slider set to 100%, "Dither" dropdown set to "Default", and a blue "Optimize with these settings" button.](https://static.simonwillison.net/static/2026/gif-optimizer-tweak.jpg)
 
-### `"uvx rodney --help" 실행...`
-
-> `"uvx rodney --help"를 실행하고 해당 도구를 사용하여 작업을 시도해 보세요. 테스트에는 이 GIF를 사용하세요. https://static.simonwillison.net/static/2026/animated-word-cloud-demo.gif`
+> `Run “uvx rodney --help” and use that tool to tray your work - use this GIF for testing https://static.simonwillison.net/static/2026/animated-word-cloud-demo.gif`
 
 코딩 에이전트는 작업하는 동안 코드를 테스트할 수 있는 능력이 있는지 확인하면 _훨씬 더 잘_ 작동합니다.
 
-웹 인터페이스를 테스트하는 방법에는 여러 가지가 있습니다. Playwright, Selenium 및 `agent-browser`는 세 가지 확실한 옵션입니다.
+웹 인터페이스를 테스트하는 방법에는 여러 가지가 있습니다. [Playwright](https://playwright.dev/), [Selenium](https://www.selenium.dev/) 및 [agent-browser](https://agent-browser.dev/)는 세 가지 확실한 옵션입니다.
 
-Rodney는 제가 직접 만든 브라우저 자동화 도구로, 설치가 빠르고 에이전트가 도구를 사용하는 데 필요한 모든 것을 가르치도록 설계된 `--help` 출력이 있습니다.
+[Rodney](https://github.com/simonw/rodney)는 제가 직접 만든 브라우저 자동화 도구로, 설치가 빠르고 에이전트가 도구를 사용하는 데 필요한 모든 것을 가르치도록 설계된 `--help` 출력이 있습니다.
 
-이것은 훌륭하게 작동했습니다. 세션 기록에서 Claude가 Rodney를 사용하고 발견한 사소한 버그를 수정하는 것을 볼 수 있습니다. 예를 들면 다음과 같습니다.
+이것은 훌륭하게 작동했습니다. [세션 기록](https://claude.ai/code/session_01C8JpE3yQpwHfBCFni4ZUc4)에서 Claude가 Rodney를 사용하고 발견한 사소한 버그를 수정하는 것을 볼 수 있습니다. 예를 들면 다음과 같습니다.
 
-> CSS `display: none`이 인라인 스타일 재설정을 이기고 있습니다. `display: 'block'`을 명시적으로 설정해야 합니다.
+> The CSS `display: none` is winning over the inline style reset. I need to set `display: 'block'` explicitly.
 
 ## 후속 프롬프트
 
 Claude Code로 작업할 때 저는 보통 그것이 무엇을 하고 있는지 주시하여 여전히 진행 중일 때 방향을 바꿀 수 있도록 합니다. 또한 작업하는 동안 새로운 아이디어가 떠오르면 대기열에 추가합니다.
 
-> `빌드 스크립트와 원본 gifsicle 코드에 대한 diff를 적절한 하위 디렉토리에 커밋에 포함하세요.`
-> 
-> `빌드 스크립트는 gifsicle 리포지토리를 /tmp에 복제하고 diff를 적용하기 전에 알려진 커밋으로 전환해야 합니다. 따라서 커밋에 gifsicle 사본은 없지만 wqsm을 빌드하는 데 필요한 모든 스크립트는 있습니다.`
+> `Include the build script and diff against original gifsicle code in the commit in an appropriate subdirectory`
+>
+> `The build script should clone the gifsicle repo to /tmp and switch to a known commit before applying the diff - so no copy of gifsicle in the commit but all the scripts needed to build the wqsm`
 
-WebAssembly에서 Gifsicle을 작동시키는 방법을 알아내는 데 _많은_ 노력을 기울이고 있다는 것을 알았을 때 이것을 추가했습니다. 여기에는 원본 소스 코드를 패치하는 것도 포함됩니다. 다음은 리포지토리에 추가한 패치와 빌드 스크립트입니다.
+WebAssembly에서 Gifsicle을 작동시키는 방법을 알아내는 데 _많은_ 노력을 기울이고 있다는 것을 알았을 때 이것을 추가했습니다. 여기에는 원본 소스 코드를 패치하는 것도 포함됩니다. 다음은 리포지토리에 추가한 [패치](https://github.com/simonw/tools/blob/main/lib/gifsicle/gifsicle-wasm.patch)와 [빌드 스크립트](https://github.com/simonw/tools/blob/main/lib/gifsicle/build.sh)입니다.
 
-저는 해당 리포지토리에 지원 파일이 있는 패턴이 이미 있다는 것을 알고 있었지만 그 패턴이 무엇인지 기억할 수 없었습니다. "적절한 하위 디렉토리"라고 말하는 것만으로도 Claude가 어디에 둘지 알아내는 데 충분했습니다. 기존 `lib/` 디렉토리를 찾아 사용했습니다.
+저는 해당 리포지토리에 지원 파일이 있는 패턴이 이미 있다는 것을 알고 있었지만 그 패턴이 무엇인지 기억할 수 없었습니다. "in an appropriate subdirectory"라고 말하는 것만으로도 Claude가 어디에 둘지 알아내는 데 충분했습니다. 기존 [lib/ 디렉토리](https://github.com/simonw/tools/tree/main/lib)를 찾아 사용했습니다.
 
-> `wasm 번들을 포함해야 합니다.`
+> `You should include the wasm bundle`
 
-이것은 아마도 필요하지 않았을 것입니다. 하지만 컴파일된 WASM 파일(233KB로 판명됨)이 리포지토리에 커밋되었는지 절대적으로 확인하고 싶었습니다. 저는 `simonw/tools`를 `tools.simonwillison.net`의 GitHub Pages를 통해 제공하며 로컬에서 빌드할 필요 없이 작동하기를 원했습니다.
+이것은 아마도 필요하지 않았을 것입니다. 하지만 컴파일된 WASM 파일([233KB로 판명됨](https://github.com/simonw/tools/blob/main/lib/gifsicle/gifsicle.wasm))이 리포지토리에 커밋되었는지 절대적으로 확인하고 싶었습니다. 저는 `simonw/tools`를 [tools.simonwillison.net](https://tools.simonwillison.net/)의 GitHub Pages를 통해 제공하며 로컬에서 빌드할 필요 없이 작동하기를 원했습니다.
 
-> `HTML 페이지가 gifsicle에 대한 크레딧을 표시하고 리포지토리에 링크하도록 하세요.`
+> `Make sure the HTML page credits gifsicle and links to the repo`
 
 이것은 단지 예의입니다! 저는 종종 다른 사람들의 오픈 소스 프로젝트 주위에 WebAssembly 래퍼를 구축하며 결과 페이지에서 그들이 크레딧을 받도록 하는 것을 좋아합니다.
 
 Claude는 이것을 도구의 바닥글에 추가했습니다.
 
-> Eddie Kohler의 gifsicle로 빌드되었으며 WebAssembly로 컴파일되었습니다. gifsicle은 GNU 일반 공중 사용 허가서 버전 2에 따라 출시되었습니다.
-
----
-Source: https://simonwillison.net/guides/agentic-engineering-patterns/gif-optimization/
+> Built with [gifsicle](https://github.com/kohler/gifsicle) by Eddie Kohler, compiled to WebAssembly. gifsicle is released under the GNU General Public License, version 2.

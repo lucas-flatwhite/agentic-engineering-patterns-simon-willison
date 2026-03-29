@@ -1,14 +1,8 @@
----
-title: Using Git with coding agents
-description: How to use Git's basic and advanced features to manage code changes when working with AI coding agents.
-source: https://simonwillison.net/guides/agentic-engineering-patterns/using-git-with-coding-agents/
----
-
 # Using Git with coding agents
 
 Git is a key tool for working with coding agents. Keeping code in version control lets us record how that code changes over time and investigate and reverse any mistakes. All of the coding agents are fluent in using Git's features, both basic and advanced.
 
-This fluency means we can be more ambitious about how we use Git ourselves. We don't need to memorize *how* to do things with Git, but staying aware of what's possible means we can take advantage of the full suite of Git's abilities.
+This fluency means we can be more ambitious about how we use Git ourselves. We don't need to  memorize _how_ to do things with Git, but staying aware of what's possible means we can take advantage of the full suite of Git's abilities.
 
 ## Git essentials
 
@@ -16,27 +10,28 @@ Each Git project lives in a **repository** - a folder on disk that can track cha
 
 Git supports **branches**, which allow you to construct and experiment with new changes independently of each other. Branches can then be **merged** back into your main branch (using various methods) once they are deemed ready.
 
-Git repositories can be **cloned** onto a new machine, and that clone includes both the current files and the full history of changes to them. This means developers - or coding agents - can browse and explore that history without any extra network traffic, making history diving effectively free.
+Git repositories can be **cloned** onto a new machine, and that clone includes both the current files and the full history of changes to them.
+This means developers - or coding agents - can browse and explore that history without any extra network traffic, making history diving effectively free.
 
-Git repositories can live just on your own machine, but Git is designed to support collaboration and backups by publishing them to a **remote**, which can be public or private. GitHub is the most popular place for these remotes but Git is open source software that enables hosting these remotes on any machine or service that supports the Git protocol.
+Git repositories can live just on your own machine,  but Git is designed to support collaboration and backups by publishing them to a **remote**, which can be public or private. GitHub is the most popular place for these remotes but Git is open source software that enables hosting these remotes on any machine or service that supports the Git protocol.
 
 ## Core concepts and prompts
 
 Coding agents all have a deep understanding of Git jargon. The following prompts should work with any of them:
 
-> Start a new Git repo here
+Start a new Git repo here
 
 To turn the folder the agent is working in into a Git repository - the agent will probably run the `git init` command. If you just say "repo" agents will assume you mean a Git repository.
 
-> Commit these changes
+Commit these changes
 
 Create a new Git commit to record the changes the agent has made - usually with the `git commit -m "commit message"` command.
 
-> Add username/repo as a github remote
+Add username/repo as a github remote
 
 This should configure your repository for GitHub. You'll need to create a new repo first using [github.com/new](https://github.com/new), and configure your machine to talk to GitHub.
 
-> Review changes made today
+Review changes made today
 
 Or "recent changes" or "last three commits".
 
@@ -44,25 +39,24 @@ This is a great way to start a fresh coding agents session. Telling the agent to
 
 Seeding the session in this way means you can start talking about that code - suggest additional fixes, ask questions about how it works, or propose the next change that builds on what came before.
 
-> Integrate latest changes from main
+Integrate latest changes from main
 
 Run this on your main branch to fetch other contributions from the remote repository, or run it in a branch to integrate the latest changes on main.
 
 There are multiple ways to merge changes, including merge, rebase, squash or fast-forward. If you can't remember the details of these that's fine:
 
-> Discuss options for integrating changes from main
+Discuss options for integrating changes from main
 
 Agents are great at explaining the pros and cons of different merging strategies, and everything in git can always be undone so there's minimal risk in trying new things.
+Sort out this git mess for me
 
-> Sort out this git mess for me
-
-I use this universal prompt surprisingly often! Here's [a recent example](https://simonwillison.net/2024/Mar/21/sort-out-this-git-mess-for-me/) where it fixed a cherry-pick for me that failed with a merge conflict.
+I use this universal prompt surprisingly often! Here's [a recent example](https://gisthost.github.io/?2aa2ee2fbd08d272528bbfc3b54a1a7d/page-001.html) where it fixed a cherry-pick for me that failed with a merge conflict.
 
 There are plenty of ways you can get into a mess with Git, often through pulls or rebase commands that end in a merge conflict, or just through adding the wrong things to Git's staging environment.
 
-Unpicking those used to be the most difficult and time consuming parts of working with Git. No more! Coding agents can navigate the most Byzantine of merge conflicts, reasoning through the intent of the new code and figuring out what to keep and how to combine conflicting changes. If your code has automated tests (and [it should](https://simonwillison.net/2023/Dec/14/ai-better-code/)) the agent can ensure those pass before finalizing that merge.
+Unpicking those used to be the most difficult and time consuming parts of working with Git. No more! Coding agents can navigate the most Byzantine of merge conflicts, reasoning through the intent of the new code and figuring out what to keep and how to combine conflicting changes. If your code has automated tests (and [it should](https://simonwillison.net/guides/agentic-engineering-patterns/red-green-tdd/)) the agent can ensure those pass before finalizing that merge.
 
-> Find and recover my code that does ...
+Find and recover my code that does ...
 
 If you lose code that you are working on that's previously been committed (or saved with `git stash`) your agent can probably find it for you.
 
@@ -70,9 +64,9 @@ Git has a mechanism called the `reflog` which can often capture details of code 
 
 Just tell them what to find and watch them dive in.
 
-> Use git bisect to find when this bug was introduced: ...
+Use git bisect to find when this bug was introduced: ...
 
-`git bisect` is one of the most powerful debugging tools in Git's arsenal, but it has a relatively steep learning curve that often deters developers from using it.
+Git bisect is one of the most powerful debugging tools in Git's arsenal, but it has a relatively steep learning curve that often deters developers from using it.
 
 When you run a bisect operation you provide Git with some kind of test condition and a start and ending commit range. Git then runs a binary search to identify the earliest commit for which your test condition fails.
 
@@ -94,15 +88,15 @@ Coding agents are really good at using Git's advanced history rewriting features
 
 ### Undo or rewrite commits
 
-> Undo last commit
+Undo last commit
 
 It's common to commit code and then regret it - realize that it includes a file you didn't mean to include, for example. The git recipe for this is `git reset --soft HEAD~1`. I've never been able to remember that, and now I don't have to!
 
-> Remove uv.lock from that last commit
+Remove uv.lock from that last commit
 
 You can also perform more finely grained surgery on commits - rewriting them to remove just a single file, for example.
 
-> Combine last three commits with a better commit message
+Combine last three commits with a better commit message
 
 Agents can rewrite commit messages and can combine multiple commits into a single unit.
 
@@ -114,6 +108,6 @@ A trick I find myself using quite often is extracting out code from a larger rep
 
 One common example is library extraction. I may have built some classes and functions into a project and later realized they would make more sense as a standalone reusable code library.
 
-> Start a new repo at /tmp/distance-functions and build a Python library there with the lib/distance_functions.py module from here - build a similar commit history copying the author and commit dates in the new repo
+Start a new repo at /tmp/distance-functions and build a Python library there with the lib/distance_functions.py module from here - build a similar commit history copying the author and commit dates in the new repo
 
 This kind of operation used to be involved enough that most developers would create a fresh copy detached from that old commit history. We don't have to settle for that any more!

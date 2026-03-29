@@ -22,7 +22,7 @@ Here's what I mean by "good code":
 *   We _know the code works_. We've taken steps to confirm to ourselves and to others that the code is fit for purpose.
 *   It solves the right problem.
 *   It handles error cases gracefully and predictably: it doesn't just consider the happy path. Errors should provide enough information to help future maintainers understand what went wrong.
-*   It's simple and minimal - it does only what's needed, in a way that both humans and machines can understand now and maintain in the future.
+*   It’s simple and minimal - it does only what’s needed, in a way that both humans and machines can understand now and maintain in the future.
 *   It's protected by tests. The tests show that it works now and act as a regression suite to avoid it quietly breaking in the future.
 *   It's documented at an appropriate level, and that documentation reflects the current state of the system - if the code changes an existing behavior the existing documentation needs to be updated to match.
 *   The design affords future changes. It's important to maintain [YAGNI](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it) - code with added complexity to anticipate future changes that may never come is often bad code - but it's also important not to write code that makes future changes much harder than they should be.
@@ -37,6 +37,3 @@ The challenge is to develop new personal and organizational habits that respond 
 These best practices are still being figured out across our industry. I'm still figuring them out myself.
 
 For now I think the best we can do is to second guess ourselves: any time our instinct says "don't build that, it's not worth the time" fire off a prompt anyway, in an asynchronous agent session where the worst that can happen is you check ten minutes later and find that it wasn't worth the tokens.
-
----
-Source: https://simonwillison.net/guides/agentic-engineering-patterns/code-is-cheap/

@@ -43,6 +43,3 @@ Some people extend that definition to cover any time an LLM is used to produce c
 Just like the field it attempts to cover, _Agentic Engineering Patterns_ is very much a work in progress. My goal is to identify and describe patterns for working with these tools that demonstrably get results, and that are unlikely to become outdated as the tools advance.
 
 I'll continue adding more chapters as new techniques emerge. No chapter should be considered finished. I'll be updating existing chapters as our understanding of these patterns evolves.
-
----
-Source: https://simonwillison.net/guides/agentic-engineering-patterns/what-is-agentic-engineering/
