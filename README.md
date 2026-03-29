@@ -37,6 +37,7 @@ The documents in this repository are structured as a living guide made of chapte
 | **3. Testing and QA** | Ensuring Reliability | Red/green TDD, test-first approach, and agentic manual testing |
 | **4. Understanding Code** | Handling Legacy & Complexity | Code analysis through linear walkthroughs and interactive explanations |
 | **5. Annotated Prompts** | Real-world Use Cases | Building an optimization tool with annotated real prompts |
+| **6. Appendix** | Reusable Prompts | Curated prompts for artifacts, proofreading, and alt text |
 
 For more details, check out the [Agentic Engineering Patterns intro](./docs/en/00-agentic-engineering-patterns-intro.md).
 
@@ -94,3 +95,4 @@ ruby scripts/render_toc.rb
 
 - **Original Guide**: [Agentic Engineering Patterns](https://simonwillison.net/guides/agentic-engineering-patterns/) by Simon Willison
 - **License**: The content in this repository is distributed into the public domain under the [CC0 (Creative Commons Zero v1.0 Universal)](LICENSE) license.
+- **Last synced**: 2026-03-29

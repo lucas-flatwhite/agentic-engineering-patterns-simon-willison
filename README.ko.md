@@ -37,6 +37,7 @@
 | **3. 테스트와 QA** | 신뢰성 확보 | 레드/그린 TDD, 테스트 우선 접근법, 에이전트 수동 테스트 |
 | **4. 코드 이해하기** | 레거시 및 복잡성 대응 | 선형 워크스루 및 대화형 설명을 통한 코드 분석 |
 | **5. 프롬프트 분석** | 실제 활용 사례 | 주석이 달린 실제 프롬프트를 통한 최적화 도구 구축 사례 |
+| **6. 부록** | 재사용 가능한 프롬프트 | 아티팩트, 교정, 대체 텍스트를 위한 프롬프트 모음 |
 
 자세한 내용은 [에이전틱 엔지니어링 패턴 소개](./docs/ko/00-agentic-engineering-patterns-intro.md) 문서에서 확인할 수 있습니다.
 
@@ -94,3 +95,4 @@ ruby scripts/render_toc.rb
 
 - **원본 가이드**: [Agentic Engineering Patterns](https://simonwillison.net/guides/agentic-engineering-patterns/) by Simon Willison
 - **라이선스**: 본 저장소의 내용은 [CC0 (Creative Commons Zero v1.0 Universal)](LICENSE) 라이선스에 따라 퍼블릭 도메인으로 배포됩니다.
+- **마지막 동기화**: 2026-03-29
