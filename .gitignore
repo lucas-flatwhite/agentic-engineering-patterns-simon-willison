@@ -3,3 +3,6 @@ sources/
 node_modules/
 _site/
 .github/workflows/
+
+# Superpowers docs
+docs/superpowers/
